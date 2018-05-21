@@ -53,10 +53,27 @@ void BInsertSort(int R[], int n)
     }
 }
 
-
-
-
-
+void BubbleSort(int R[], int n)
+{
+    int i, j, temp, flag;
+    // index of data stored in array start from 0
+    for(i=0; i<=n-2; i++)
+    {
+        flag = 0;
+        for(j=n-1; j>=i+1; j--)
+        {
+            if(R[j] < R[j-1])
+            {
+                temp = R[j];
+                R[j] = R[j-1];
+                R[j-1] = temp;
+                flag = 1;
+            }
+        }
+        if(flag == 0)
+            return;
+    }
+}
 
 
 int main()
@@ -68,10 +85,16 @@ int main()
     InsertSort(R,n);
     printList(R,n);
 
-    // TODO 
+    // TODO looks like it's wrong, bcz it's not working 
     int R2[8] = {49, 38, 65, 97, 76, 13, 27, 49};
     printf("BInsertSort: \n");
     printList(R2,n);
     BInsertSort(R2,n);
     printList(R2,n);
+
+    int R3[8] = {49, 38, 65, 97, 76, 13, 27, 49};
+    printf("BubbleSort: \n");
+    printList(R3, n);
+    BubbleSort(R3, n);
+    printList(R3, n);
 }
