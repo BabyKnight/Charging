@@ -75,6 +75,38 @@ void BubbleSort(int R[], int n)
     }
 }
 
+void QuickSort(int R[], int l, int r)
+{
+    // if left index > or = right index,
+    // it is unnecessary to do sort
+    if(l<r)
+    {
+        int i=l, j=r;
+        int temp = R[l];
+        // if i==j, then R[l] get the final position
+        while(i < j)
+        {
+            while(i<j && R[j] >= temp)
+                j--;
+            if(i<j)
+            {
+                R[i] = R[j];
+                i++;
+            }
+            while(i<j && R[i] <= temp)
+                i++;
+            if(i<j)
+            {
+                R[j] = R[i];
+                j--;
+            }
+        }
+        R[i] = temp;
+        QuickSort(R, l, i-1);
+        QuickSort(R, i+1, r);
+    }
+}
+
 
 int main()
 {
@@ -97,4 +129,10 @@ int main()
     printList(R3, n);
     BubbleSort(R3, n);
     printList(R3, n);
+
+    int R4[12] = {0, 0, 49, 38, 65, 97, 76, 13, 27, 49, 0, 0};
+    printf("QuickSort: \n");
+    printList(R4, 12);
+    QuickSort(R4, 2, 9);
+    printList(R4, 12);
 }
