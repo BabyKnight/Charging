@@ -84,7 +84,7 @@ void QuickSort(int R[], int l, int r)
         int i=l, j=r;
         int temp = R[l];
         // if i==j, then R[l] get the final position
-        while(i < j)
+        while(i != j)
         {
             while(i<j && R[j] >= temp)
                 j--;
@@ -105,6 +105,24 @@ void QuickSort(int R[], int l, int r)
         QuickSort(R, l, i-1);
         QuickSort(R, i+1, r);
     }
+}
+
+
+void SelectSort(int R[], int n)
+{
+    int i, j, temp, k;
+    for(i=0; i<=n-1; i++)
+    {
+        k = i;
+        for(j=i+1; j<=n-1; j++)
+        {
+            if(R[j] < R[k])
+                k = j;
+        }
+        temp = R[i];
+        R[i] = R[k];
+        R[k] = temp;
+    } 
 }
 
 
@@ -135,4 +153,10 @@ int main()
     printList(R4, 12);
     QuickSort(R4, 2, 9);
     printList(R4, 12);
+
+    int R5[8] = {49, 38, 65, 97, 76, 13, 27, 49};
+    printf("SelectSort: \n");
+    printList(R5, n);
+    SelectSort(R5, n);
+    printList(R5, n);
 }
