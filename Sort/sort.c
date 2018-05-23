@@ -126,6 +126,35 @@ void SelectSort(int R[], int n)
 }
 
 
+void HeapAdjust(int R[], int i, int n)
+{
+    int j, temp;
+    temp = R[i];
+    for(j=2*i; j<=n; j*=2)
+    {
+        if(j<n && R[j] > R[j+1])
+            ++j;
+        if(temp>R[j])
+            break;
+        R[i] = R[j];
+        i = j;
+    }
+    R[i] = temp;
+}
+
+
+void HeapSort(int R[], int n)
+{
+    int i, temp;
+    for(i=n/2; i>=1; i--)
+    {
+        HeapAdjust(R, i, n);
+        printList(R, 8);
+    }
+    // TODO
+    
+}
+
 int main()
 {
     int R[8] = {49, 38, 65, 97, 76, 13, 27, 49};
@@ -159,4 +188,10 @@ int main()
     printList(R5, n);
     SelectSort(R5, n);
     printList(R5, n);
+
+    int R6[8] = {0, 49, 38, 65, 97, 76, 13, 27};
+    printf("HeapSort: \n");
+    printList(R6, n);
+    HeapSort(R6, n);
+    printList(R6, n);
 }
