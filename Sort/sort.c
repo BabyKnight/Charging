@@ -132,7 +132,7 @@ void HeapAdjust(int R[], int i, int n)
     temp = R[i];
     for(j=2*i; j<=n; j*=2)
     {
-        if(j<n && R[j] > R[j+1])
+        if(j<n && R[j] < R[j+1])
             ++j;
         if(temp>R[j])
             break;
@@ -146,13 +146,17 @@ void HeapAdjust(int R[], int i, int n)
 void HeapSort(int R[], int n)
 {
     int i, temp;
-    for(i=n/2; i>=1; i--)
+    for(i=(n-1)/2; i>=1; i--)
     {
-        HeapAdjust(R, i, n);
-        printList(R, 8);
+        HeapAdjust(R, i, n-1);
     }
-    // TODO
-    
+    for(i=(n-1); i>=2; i--)
+    {
+        temp = R[1];
+        R[1] = R[i];
+        R[i] = temp;
+        HeapAdjust(R, 1, i-1);
+    }
 }
 
 int main()
