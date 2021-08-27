@@ -182,6 +182,51 @@ int MaxLnoNode(BTNode *p)
         return 0;
 }
 
+void print_tree(BTNode *t)
+{
+    BTNode *temp;
+
+    BTNode *stack[MAX];
+    int top=-1;
+
+    int front, rear;
+    BTNode *que[MAX];
+    front=rear=0;
+
+    if(t != NULL)
+    {
+        // root node push into queue
+        rear=(rear+1)%MAX;
+        que[rear]=t;
+
+        while(front != rear)
+        {
+            front=(front+1)%MAX;
+            temp = que[front];
+            printf("%d", temp->data);
+            if(temp->left != NULL)
+                stack[++top]=temp;
+            if(temp->right != NULL)
+                stack[++top]=temp;
+        }
+    
+        while(top != -1)
+        {
+            temp = stack[top--];
+            printf("%d", temp->data);
+            if(temp->left != NULL)
+            {
+                rear=(rear+1)%MAX;
+                que[rear]=temp->left;
+            }
+            if(temp->right != NULL)
+            {
+                rear=(rear+1)%MAX;
+                que[rear]=temp->right;
+            }
+        }
+    }
+}
 
 int main()
 {
@@ -201,5 +246,7 @@ int main()
     printf("\n");
     int max_no = MaxLnoNode(p);
     printf("Max no of level is %d\n", max_no);
+
+    print_tree(p);
 }
 
